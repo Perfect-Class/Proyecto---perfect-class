@@ -3501,8 +3501,8 @@ details-disclosure > details {
 }
 
 
+/* *****************  CÓDIGO ACTUALIZADO *********************** */
 
-/* *****************  CODIGO NUEVOO *********************** */
 /* Estilos para el Pop-up Banner */
 .popup-banner {
   display: none;
@@ -3538,17 +3538,25 @@ details-disclosure > details {
   padding: 10px 20px;
   font-size: 16px;
   cursor: pointer;
+  background-color: #0e1b4d; /* Color azulado */
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+}
+
+.action-button:hover {
+  background-color: #0c163d; /* Un tono más oscuro al pasar el cursor */
 }
 
 /* Estilos para el Modal del Formulario */
 .modal-overlay {
-  display: none;
+  display: none; /* Importante para que el modal esté oculto inicialmente */
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  overflow: auto; /* Permite el desplazamiento si el contenido es más grande que la pantalla */
+  overflow-y: auto; /* Permite el desplazamiento vertical si el contenido es más grande que la pantalla */
   background-color: rgba(0,0,0,0.5);
   z-index: 1001;
 }
@@ -3561,8 +3569,6 @@ details-disclosure > details {
   background-color: #fff;
   padding: 30px;
   border-radius: 10px;
-  max-height: 90vh; /* Limita la altura máxima al 90% de la altura de la ventana */
-  overflow-y: auto; /* Añade una barra de desplazamiento vertical si es necesario */
 }
 
 .modal-content h2 {
@@ -3576,10 +3582,26 @@ details-disclosure > details {
 }
 
 .modal-content form input,
-.modal-content form textarea {
+.modal-content form textarea,
+.modal-content form select {
   width: 100%;
   padding: 8px;
   box-sizing: border-box;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+/* Estilos para los campos input y select cuando están enfocados */
+.modal-content form input:focus,
+.modal-content form select:focus {
+  outline: none;
+  border: 2px solid #0e1b4d; /* Borde azul oscuro al enfocar */
+}
+
+/* Estilos para los campos input y select cuando son válidos */
+.modal-content form input:valid,
+.modal-content form select:valid {
+  border-color: #ADD8E6; /* Color celeste cuando el campo tiene un valor */
 }
 
 .modal-content form input[type="submit"] {
@@ -3587,5 +3609,98 @@ details-disclosure > details {
   padding: 10px 20px;
   font-size: 16px;
   cursor: pointer;
+  background-color: #0e1b4d; /* Color azulado */
+  color: #fff;
+  border: none;
+  border-radius: 5px;
 }
 
+.modal-content form input[type="submit"]:hover {
+  background-color: #0c163d;
+}
+
+/* Estilos para el Modal de Confirmación */
+#confirmation-modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow-y: auto; /* Añadido para el caso en que el modal de confirmación sea muy alto */
+  background-color: rgba(0,0,0,0.5);
+  z-index: 1001;
+}
+
+#confirmation-modal .modal-content {
+  position: relative;
+  width: 80%;
+  max-width: 600px;
+  margin: 100px auto;
+  background-color: #fff;
+  padding: 30px;
+  border-radius: 10px;
+  text-align: center;
+}
+
+#confirmation-modal .close-button {
+  position: absolute;
+  top: 10px;
+  right: 20px;
+  cursor: pointer;
+  font-size: 30px;
+}
+
+#confirmation-modal h2 {
+  margin-bottom: 20px;
+}
+
+#confirmation-modal p {
+  margin-bottom: 30px;
+}
+
+#confirmation-modal .action-button {
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  background-color: #0e1b4d; /* Color azulado */
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+}
+
+#confirmation-modal .action-button:hover {
+  background-color: #0c163d; /* Un tono más oscuro al pasar el cursor */
+}
+
+/* Estilos para las alertas personalizadas */
+.alert-modal-overlay {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.5);
+  z-index: 1002;
+}
+
+.alert-modal-content {
+  width: 80%;
+  max-width: 500px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 10px;
+  text-align: center;
+}
+
+.alert-modal-content h2 {
+  margin-bottom: 15px;
+}
+
+.alert-modal-content p {
+  margin-bottom: 20px;
+}

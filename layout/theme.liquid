@@ -280,7 +280,7 @@
         document.documentElement.classList.add('shopify-design-mode');
       }
           </script>
- 
+
            
   </head>
 
@@ -297,7 +297,6 @@
 
     <main id="MainContent" class="content-for-layout focus-none" role="main" tabindex="-1">
       {{ content_for_layout }}{% include 'ymq_lock_css_js' %}
-
     </main>
 
     {% sections 'footer-group' %}
@@ -351,126 +350,260 @@
     {%- if settings.predictive_search_enabled -%}
       <script src="{{ 'predictive-search.js' | asset_url }}" defer="defer"></script>
     {%- endif -%}
-  {% comment %} *************************************** BANNNER POP UP ****************************** {% endcomment %}
-{% if template.name == 'index' %}
-  <!-- Pop-up Banner -->
-  <div id="popup-banner" class="popup-banner">
-    <div class="popup-content">
-      <span id="close-popup" class="close-button">&times;</span>
-      <h2>Bienvenido a nuestra tienda</h2>
-      <p>Crea tu cuenta de usuario para poder cotizar los productos que desees</p>
-      <!-- Botón "AQUÍ" -->
-      <button id="open-form-modal" class="action-button">Crear Cuenta</button>
-    </div>
-  </div>
 
-  <!-- Modal del formulario -->
-  <div id="form-modal" class="modal-overlay">
-    <div class="modal-content">
-      <span id="close-form-modal" class="close-button">&times;</span>
-      <h2>Formulario de Registro</h2>
-      <form id="registration-form" action="#" method="post">
-        <label for="rut">Rut de la empresa:</label>
-        <input type="text" id="rut" name="rut" required>
+    {% comment %} *************************************** BANNER POP UP ****************************** {% endcomment %}
+    {% if template.name == 'index' %}
+      <!-- Pop-up Banner -->
+      <div id="popup-banner" class="popup-banner">
+        <div class="popup-content">
+          <span id="close-popup" class="close-button">&times;</span>
+          <h2>Bienvenido a nuestra tienda</h2>
+          <p>Crea tu cuenta de usuario para poder cotizar los productos que desees</p>
+          <!-- Botón "Crear Cuenta" -->
+          <button id="open-form-modal" class="action-button">Crear Cuenta</button>
+        </div>
+      </div>
 
-        <label for="email">Email:</label>
-        <input type="email" id="email" name="email" required>
+      <!-- Modal del formulario -->
+      <div id="form-modal" class="modal-overlay">
+        <div class="modal-content">
+          <span id="close-form-modal" class="close-button">&times;</span>
+          <h2>Formulario de Registro</h2>
+          <form id="registration-form" action="#" method="post">
+            <label for="rut">Rut de la empresa:</label>
+            <input type="text" id="rut" name="rut" required>
 
-        <label for="nombre">Nombre y apellido:</label>
-        <input type="text" id="nombre" name="nombre" required>
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
 
-        <label for="giro">Giro:</label>
-        <input type="text" id="giro" name="giro" required>
+            <label for="nombre">Nombre y apellido:</label>
+            <input type="text" id="nombre" name="nombre" required>
 
-        <label for="razon_social">Razón social:</label>
-        <input type="text" id="razon_social" name="razon_social" required>
+            <label for="giro">Giro:</label>
+            <input type="text" id="giro" name="giro" required>
 
-        <label for="region">Región:</label>
-        <input type="text" id="region" name="region" required>
+            <label for="razon_social">Razón social:</label>
+            <input type="text" id="razon_social" name="razon_social" required>
 
-        <label for="ciudad">Ciudad:</label>
-        <input type="text" id="ciudad" name="ciudad" required>
+            <label for="region">Región:</label>
+            <select id="region" name="region" required>
+              <option value="" disabled selected></option>
+              <option value="Región de Arica y Parinacota">Región de Arica y Parinacota</option>
+              <option value="Región de Tarapacá">Región de Tarapacá</option>
+              <option value="Región de Antofagasta">Región de Antofagasta</option>
+              <option value="Región de Atacama">Región de Atacama</option>
+              <option value="Región de Coquimbo">Región de Coquimbo</option>
+              <option value="Región de Valparaíso">Región de Valparaíso</option>
+              <option value="Región Metropolitana de Santiago">Región Metropolitana de Santiago</option>
+              <option value="Región del Libertador General Bernardo O'Higgins">Región del Libertador General Bernardo O'Higgins</option>
+              <option value="Región del Maule">Región del Maule</option>
+              <option value="Región de Ñuble">Región de Ñuble</option>
+              <option value="Región del Biobío">Región del Biobío</option>
+              <option value="Región de La Araucanía">Región de La Araucanía</option>
+              <option value="Región de Los Ríos">Región de Los Ríos</option>
+              <option value="Región de Los Lagos">Región de Los Lagos</option>
+              <option value="Región de Aysén del General Carlos Ibáñez del Campo">Región de Aysén del General Carlos Ibáñez del Campo</option>
+              <option value="Región de Magallanes y de la Antártica Chilena">Región de Magallanes y de la Antártica Chilena</option>
+            </select>
 
-        <label for="comuna">Comuna:</label>
-        <input type="text" id="comuna" name="comuna" required>
+            <label for="ciudad">Ciudad:</label>
+            <input type="text" id="ciudad" name="ciudad" required>
 
-        <label for="mensaje">Mensaje (opcional):</label>
-        <textarea id="mensaje" name="mensaje"></textarea>
+            <label for="comuna">Comuna:</label>
+            <select id="comuna" name="comuna" required>
+              <option value=""></option>
+            </select>
 
-        <input type="submit" value="Enviar" class="submit-button">
-      </form>
-    </div>
-  </div>
+            <label for="mensaje">Mensaje (opcional):</label>
+            <textarea id="mensaje" name="mensaje"></textarea>
 
-  <script>
-    document.addEventListener('DOMContentLoaded', function() {
-      var popup = document.getElementById('popup-banner');
-      var closePopupBtn = document.getElementById('close-popup');
-      var openFormBtn = document.getElementById('open-form-modal');
-      var formModal = document.getElementById('form-modal');
-      var closeFormModalBtn = document.getElementById('close-form-modal');
-      var registrationForm = document.getElementById('registration-form');
-  
-      // Mostrar el pop-up al cargar la página
-      popup.style.display = 'block';
-  
-      // Cerrar el pop-up al hacer clic en la "X"
-      closePopupBtn.addEventListener('click', function() {
-        popup.style.display = 'none';
-      });
-  
-      // Abrir el modal del formulario al hacer clic en "AQUÍ"
-      openFormBtn.addEventListener('click', function() {
-        popup.style.display = 'none'; // Cerrar el pop-up
-        formModal.style.display = 'block'; // Mostrar el modal del formulario
-      });
-  
-      // Cerrar el modal del formulario al hacer clic en la "X"
-      closeFormModalBtn.addEventListener('click', function() {
-        formModal.style.display = 'none';
-      });
-  
-      // Cerrar el modal al hacer clic fuera del contenido
-      window.addEventListener('click', function(e) {
-        if (e.target == formModal) {
-          formModal.style.display = 'none';
-        }
-      });
-  
-      // Manejar el envío del formulario
-      registrationForm.addEventListener('submit', function(e) {
-        e.preventDefault(); // Prevenir el envío por defecto
-  
-        // Realizar validaciones aquí si es necesario
-        // Por ejemplo, verificar que los campos requeridos no estén vacíos
-        var rut = document.getElementById('rut').value.trim();
-        var email = document.getElementById('email').value.trim();
-        var nombre = document.getElementById('nombre').value.trim();
-        var giro = document.getElementById('giro').value.trim();
-        var razon_social = document.getElementById('razon_social').value.trim();
-        var region = document.getElementById('region').value.trim();
-        var ciudad = document.getElementById('ciudad').value.trim();
-        var comuna = document.getElementById('comuna').value.trim();
-  
-        if (rut === '' || email === '' || nombre === '' || giro === '' || razon_social === '' || region === '' || ciudad === '' || comuna === '') {
-          alert('Por favor, completa todos los campos requeridos.');
-          return;
-        }
-  
-        // Si todas las validaciones pasan, mostrar la alerta
-        alert('Solicitud de creación de Usuario enviada !!\n\nSus credenciales serán enviadas al correo ingresado en cuanto los administradores acepten su solicitud');
-  
-        // Cerrar el modal del formulario
-        formModal.style.display = 'none';
-  
-        // Opcional: Reiniciar el formulario
-        registrationForm.reset();
-      });
-    });
-  </script>
-{% endif %}
+            <input type="submit" value="Enviar" class="submit-button">
+          </form>
+        </div>
+      </div>
 
-  
-  
+      <!-- Modal de confirmación personalizado -->
+      <div id="confirmation-modal" class="modal-overlay">
+        <div class="modal-content">
+          <span id="close-confirmation-modal" class="close-button">&times;</span>
+          <h2>Solicitud de creación de Usuario enviada con éxito !!</h2>
+          <p>Sus credenciales serán enviadas al correo ingresado en cuanto los administradores acepten su solicitud.</p>
+          <button id="close-confirmation-button" class="action-button">Aceptar</button>
+        </div>
+      </div>
+
+      <!-- Script actualizado -->
+      <script>
+        document.addEventListener('DOMContentLoaded', function() {
+          var popup = document.getElementById('popup-banner');
+          var closePopupBtn = document.getElementById('close-popup');
+          var openFormBtn = document.getElementById('open-form-modal');
+          var formModal = document.getElementById('form-modal');
+          var closeFormModalBtn = document.getElementById('close-form-modal');
+          var registrationForm = document.getElementById('registration-form');
+
+          // Variables para el modal de confirmación
+          var confirmationModal = document.getElementById('confirmation-modal');
+          var closeConfirmationModalBtn = document.getElementById('close-confirmation-modal');
+          var closeConfirmationButton = document.getElementById('close-confirmation-button');
+
+          // Variables para los selects de región y comuna
+          var regionSelect = document.getElementById('region');
+          var comunaSelect = document.getElementById('comuna');
+
+          // Objeto con regiones y comunas
+          var regionesYComunas = {
+            "Región de Arica y Parinacota": ["Arica", "Camarones", "Putre", "General Lagos"],
+            "Región de Tarapacá": ["Iquique", "Alto Hospicio", "Pozo Almonte", "Camiña", "Colchane", "Huara", "Pica"],
+            "Región de Antofagasta": ["Antofagasta", "Mejillones", "Sierra Gorda", "Taltal", "Calama", "Ollagüe", "San Pedro de Atacama", "María Elena", "Tocopilla"],
+            "Región de Atacama": ["Copiapó", "Caldera", "Tierra Amarilla", "Chañaral", "Diego de Almagro", "Vallenar", "Alto del Carmen", "Freirina", "Huasco"],
+            "Región de Coquimbo": ["La Serena", "Coquimbo", "Andacollo", "La Higuera", "Paiguano", "Vicuña", "Illapel", "Canela", "Los Vilos", "Salamanca", "Ovalle", "Combarbalá", "Monte Patria", "Punitaqui", "Río Hurtado"],
+            "Región de Valparaíso": ["Valparaíso", "Casablanca", "Concón", "Juan Fernández", "Puchuncaví", "Quintero", "Viña del Mar", "Isla de Pascua", "Los Andes", "Calle Larga", "Rinconada", "San Esteban", "La Ligua", "Cabildo", "Papudo", "Petorca", "Zapallar", "Quillota", "Calera", "Hijuelas", "La Cruz", "Nogales", "San Antonio", "Algarrobo", "Cartagena", "El Quisco", "El Tabo", "Santo Domingo", "San Felipe", "Catemu", "Llaillay", "Panquehue", "Putaendo", "Santa María", "Quilpué", "Limache", "Olmué", "Villa Alemana"],
+            "Región Metropolitana de Santiago": ["Cerrillos", "Cerro Navia", "Conchalí", "El Bosque", "Estación Central", "Huechuraba", "Independencia", "La Cisterna", "La Florida", "La Granja", "La Pintana", "La Reina", "Las Condes", "Lo Barnechea", "Lo Espejo", "Lo Prado", "Macul", "Maipú", "Ñuñoa", "Pedro Aguirre Cerda", "Peñalolén", "Providencia", "Pudahuel", "Quilicura", "Quinta Normal", "Recoleta", "Renca", "San Joaquín", "San Miguel", "San Ramón", "Vitacura", "Puente Alto", "Pirque", "San José de Maipo", "Colina", "Lampa", "Tiltil", "San Bernardo", "Buin", "Calera de Tango", "Paine", "Melipilla", "Alhué", "Curacaví", "María Pinto", "San Pedro", "Talagante", "El Monte", "Isla de Maipo", "Padre Hurtado", "Peñaflor"],
+            "Región del Libertador General Bernardo O'Higgins": ["Rancagua", "Codegua", "Coinco", "Coltauco", "Doñihue", "Graneros", "Las Cabras", "Machalí", "Malloa", "Mostazal", "Olivar", "Peumo", "Pichidegua", "Quinta de Tilcoco", "Rengo", "Requínoa", "San Vicente", "Pichilemu", "La Estrella", "Litueche", "Marchigüe", "Navidad", "Paredones", "San Fernando", "Chépica", "Chimbarongo", "Lolol", "Nancagua", "Palmilla", "Peralillo", "Placilla", "Pumanque", "Santa Cruz"],
+            "Región del Maule": ["Talca", "Constitución", "Curepto", "Empedrado", "Maule", "Pelarco", "Pencahue", "Río Claro", "San Clemente", "San Rafael", "Cauquenes", "Chanco", "Pelluhue", "Curicó", "Hualañé", "Licantén", "Molina", "Rauco", "Romeral", "Sagrada Familia", "Teno", "Vichuquén", "Linares", "Colbún", "Longaví", "Parral", "Retiro", "San Javier", "Villa Alegre", "Yerbas Buenas"],
+            "Región de Ñuble": ["Chillán", "Bulnes", "Cobquecura", "Coelemu", "Coihueco", "El Carmen", "Ninhue", "Ñiquén", "Pemuco", "Pinto", "Portezuelo", "Quillón", "Quirihue", "Ránquil", "San Carlos", "San Fabián", "San Ignacio", "San Nicolás", "Treguaco", "Yungay"],
+            "Región del Biobío": ["Concepción", "Coronel", "Chiguayante", "Florida", "Hualqui", "Lota", "Penco", "San Pedro de la Paz", "Santa Juana", "Talcahuano", "Tomé", "Hualpén", "Lebu", "Arauco", "Cañete", "Contulmo", "Curanilahue", "Los Álamos", "Tirúa", "Los Ángeles", "Antuco", "Cabrero", "Laja", "Mulchén", "Nacimiento", "Negrete", "Quilaco", "Quilleco", "San Rosendo", "Santa Bárbara", "Tucapel", "Yumbel", "Alto Biobío"],
+            "Región de La Araucanía": ["Temuco", "Carahue", "Cunco", "Curarrehue", "Freire", "Galvarino", "Gorbea", "Lautaro", "Loncoche", "Melipeuco", "Nueva Imperial", "Padre Las Casas", "Perquenco", "Pitrufquén", "Pucón", "Saavedra", "Teodoro Schmidt", "Toltén", "Vilcún", "Villarrica", "Cholchol", "Angol", "Collipulli", "Curacautín", "Ercilla", "Lonquimay", "Los Sauces", "Lumaco", "Purén", "Renaico", "Traiguén", "Victoria"],
+            "Región de Los Ríos": ["Valdivia", "Corral", "Lanco", "Los Lagos", "Máfil", "Mariquina", "Paillaco", "Panguipulli", "La Unión", "Futrono", "Lago Ranco", "Río Bueno"],
+            "Región de Los Lagos": ["Puerto Montt", "Calbuco", "Cochamó", "Fresia", "Frutillar", "Los Muermos", "Llanquihue", "Maullín", "Puerto Varas", "Castro", "Ancud", "Chonchi", "Curaco de Vélez", "Dalcahue", "Puqueldón", "Queilén", "Quellón", "Quemchi", "Quinchao", "Osorno", "Puerto Octay", "Purranque", "Puyehue", "Río Negro", "San Juan de la Costa", "San Pablo", "Chaitén", "Futaleufú", "Hualaihué", "Palena"],
+            "Región de Aysén del General Carlos Ibáñez del Campo": ["Coyhaique", "Lago Verde", "Aysén", "Cisnes", "Guaitecas", "Cochrane", "O'Higgins", "Tortel", "Chile Chico", "Río Ibáñez"],
+            "Región de Magallanes y de la Antártica Chilena": ["Punta Arenas", "Laguna Blanca", "Río Verde", "San Gregorio", "Cabo de Hornos", "Antártica", "Porvenir", "Primavera", "Timaukel", "Natales", "Torres del Paine"]
+          };
+
+          // Evento que se dispara cuando cambia la selección de región
+          regionSelect.addEventListener('change', function() {
+            var selectedRegion = this.value;
+
+            // Limpiar las opciones actuales del desplegable de comunas
+            comunaSelect.innerHTML = '<option value="">Selecciona una comuna</option>';
+
+            if (selectedRegion && regionesYComunas[selectedRegion]) {
+              // Agregar las comunas correspondientes a la región seleccionada
+              regionesYComunas[selectedRegion].forEach(function(comuna) {
+                var option = document.createElement('option');
+                option.value = comuna;
+                option.textContent = comuna;
+                comunaSelect.appendChild(option);
+              });
+            }
+          });
+
+          // Mostrar el pop-up al cargar la página
+          popup.style.display = 'block';
+
+          // Cerrar el pop-up al hacer clic en la "X"
+          closePopupBtn.addEventListener('click', function() {
+            popup.style.display = 'none';
+          });
+
+          // Abrir el modal del formulario al hacer clic en "Crear Cuenta"
+          openFormBtn.addEventListener('click', function() {
+            popup.style.display = 'none'; // Cerrar el pop-up
+            formModal.style.display = 'block'; // Mostrar el modal del formulario
+          });
+
+          // Cerrar el modal del formulario al hacer clic en la "X"
+          closeFormModalBtn.addEventListener('click', function() {
+            formModal.style.display = 'none';
+          });
+
+          // Cerrar el modal al hacer clic fuera del contenido
+          window.addEventListener('click', function(e) {
+            if (e.target == formModal) {
+              formModal.style.display = 'none';
+            } else if (e.target == confirmationModal) {
+              confirmationModal.style.display = 'none';
+            }
+          });
+
+          // Manejar el envío del formulario
+          registrationForm.addEventListener('submit', function(e) {
+            e.preventDefault(); // Prevenir el envío por defecto
+
+            // Validaciones de los campos
+            var rut = document.getElementById('rut').value.trim();
+            var email = document.getElementById('email').value.trim();
+            var nombre = document.getElementById('nombre').value.trim();
+            var giro = document.getElementById('giro').value.trim();
+            var razon_social = document.getElementById('razon_social').value.trim();
+            var region = document.getElementById('region').value.trim();
+            var ciudad = document.getElementById('ciudad').value.trim();
+            var comuna = document.getElementById('comuna').value.trim();
+
+            if (rut === '' || email === '' || nombre === '' || giro === '' || razon_social === '' || region === '' || ciudad === '' || comuna === '') {
+              // Mostrar mensaje de error en un modal personalizado
+              showAlert('Campos incompletos', 'Por favor, completa todos los campos requeridos.', 'warning');
+              return;
+            }
+
+            // Si todas las validaciones pasan, mostrar el modal de confirmación
+            formModal.style.display = 'none'; // Cerrar el modal del formulario
+            confirmationModal.style.display = 'block'; // Mostrar el modal de confirmación
+
+            // Reiniciar el formulario
+            registrationForm.reset();
+          });
+
+          // Cerrar el modal de confirmación al hacer clic en la "X"
+          closeConfirmationModalBtn.addEventListener('click', function() {
+            confirmationModal.style.display = 'none';
+          });
+
+          // Cerrar el modal de confirmación al hacer clic en el botón "Aceptar"
+          closeConfirmationButton.addEventListener('click', function() {
+            confirmationModal.style.display = 'none';
+          });
+
+          // Función para mostrar alertas personalizadas
+          function showAlert(title, message, type) {
+            // Crear el modal de alerta
+            var alertModal = document.createElement('div');
+            alertModal.classList.add('alert-modal-overlay');
+
+            var alertContent = document.createElement('div');
+            alertContent.classList.add('alert-modal-content');
+
+            var alertTitle = document.createElement('h2');
+            alertTitle.innerText = title;
+
+            var alertMessage = document.createElement('p');
+            alertMessage.innerText = message;
+
+            var alertButton = document.createElement('button');
+            alertButton.classList.add('action-button');
+            alertButton.innerText = 'Aceptar';
+
+            // Estilos según el tipo de alerta
+            if (type === 'warning') {
+              alertTitle.style.color = '#e09b0b';
+            } else if (type === 'error') {
+              alertTitle.style.color = '#d93025';
+            }
+
+            // Añadir elementos al modal
+            alertContent.appendChild(alertTitle);
+            alertContent.appendChild(alertMessage);
+            alertContent.appendChild(alertButton);
+            alertModal.appendChild(alertContent);
+            document.body.appendChild(alertModal);
+
+            // Cerrar el modal al hacer clic en el botón
+            alertButton.addEventListener('click', function() {
+              document.body.removeChild(alertModal);
+            });
+
+            // Cerrar el modal al hacer clic fuera del contenido
+            alertModal.addEventListener('click', function(e) {
+              if (e.target == alertModal) {
+                document.body.removeChild(alertModal);
+              }
+            });
+          }
+        });
+      </script>
+    {% endif %}
+
   </body>
+
 </html>
