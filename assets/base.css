@@ -3499,3 +3499,93 @@ details-disclosure > details {
     --border-offset: 0px; /* Prevent the border from growing on buttons when this effect is on. */
   }
 }
+
+
+
+/* *****************  CODIGO NUEVOO *********************** */
+/* Estilos para el Pop-up Banner */
+.popup-banner {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.5);
+  z-index: 1000;
+}
+
+.popup-content {
+  position: relative;
+  width: 80%;
+  max-width: 600px;
+  margin: 100px auto;
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  text-align: center;
+}
+
+.close-button {
+  position: absolute;
+  top: 10px;
+  right: 20px;
+  cursor: pointer;
+  font-size: 30px;
+}
+
+.action-button {
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+/* Estilos para el Modal del Formulario */
+.modal-overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto; /* Permite el desplazamiento si el contenido es más grande que la pantalla */
+  background-color: rgba(0,0,0,0.5);
+  z-index: 1001;
+}
+
+.modal-content {
+  position: relative;
+  width: 90%;
+  max-width: 700px;
+  margin: 50px auto;
+  background-color: #fff;
+  padding: 30px;
+  border-radius: 10px;
+  max-height: 90vh; /* Limita la altura máxima al 90% de la altura de la ventana */
+  overflow-y: auto; /* Añade una barra de desplazamiento vertical si es necesario */
+}
+
+.modal-content h2 {
+  text-align: center;
+}
+
+/* Estilos para el formulario */
+.modal-content form label {
+  display: block;
+  margin-top: 15px;
+}
+
+.modal-content form input,
+.modal-content form textarea {
+  width: 100%;
+  padding: 8px;
+  box-sizing: border-box;
+}
+
+.modal-content form input[type="submit"] {
+  margin-top: 20px;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+}
+

@@ -280,6 +280,8 @@
         document.documentElement.classList.add('shopify-design-mode');
       }
           </script>
+ 
+           
   </head>
 
   <body class="gradient{% if settings.animations_hover_elements != 'none' %} animate--hover-{{ settings.animations_hover_elements }}{% endif %}">
@@ -349,5 +351,126 @@
     {%- if settings.predictive_search_enabled -%}
       <script src="{{ 'predictive-search.js' | asset_url }}" defer="defer"></script>
     {%- endif -%}
+  {% comment %} *************************************** BANNNER POP UP ****************************** {% endcomment %}
+{% if template.name == 'index' %}
+  <!-- Pop-up Banner -->
+  <div id="popup-banner" class="popup-banner">
+    <div class="popup-content">
+      <span id="close-popup" class="close-button">&times;</span>
+      <h2>Bienvenido a nuestra tienda</h2>
+      <p>Crea tu cuenta de usuario para poder cotizar los productos que desees</p>
+      <!-- Botón "AQUÍ" -->
+      <button id="open-form-modal" class="action-button">Crear Cuenta</button>
+    </div>
+  </div>
+
+  <!-- Modal del formulario -->
+  <div id="form-modal" class="modal-overlay">
+    <div class="modal-content">
+      <span id="close-form-modal" class="close-button">&times;</span>
+      <h2>Formulario de Registro</h2>
+      <form id="registration-form" action="#" method="post">
+        <label for="rut">Rut de la empresa:</label>
+        <input type="text" id="rut" name="rut" required>
+
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required>
+
+        <label for="nombre">Nombre y apellido:</label>
+        <input type="text" id="nombre" name="nombre" required>
+
+        <label for="giro">Giro:</label>
+        <input type="text" id="giro" name="giro" required>
+
+        <label for="razon_social">Razón social:</label>
+        <input type="text" id="razon_social" name="razon_social" required>
+
+        <label for="region">Región:</label>
+        <input type="text" id="region" name="region" required>
+
+        <label for="ciudad">Ciudad:</label>
+        <input type="text" id="ciudad" name="ciudad" required>
+
+        <label for="comuna">Comuna:</label>
+        <input type="text" id="comuna" name="comuna" required>
+
+        <label for="mensaje">Mensaje (opcional):</label>
+        <textarea id="mensaje" name="mensaje"></textarea>
+
+        <input type="submit" value="Enviar" class="submit-button">
+      </form>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      var popup = document.getElementById('popup-banner');
+      var closePopupBtn = document.getElementById('close-popup');
+      var openFormBtn = document.getElementById('open-form-modal');
+      var formModal = document.getElementById('form-modal');
+      var closeFormModalBtn = document.getElementById('close-form-modal');
+      var registrationForm = document.getElementById('registration-form');
+  
+      // Mostrar el pop-up al cargar la página
+      popup.style.display = 'block';
+  
+      // Cerrar el pop-up al hacer clic en la "X"
+      closePopupBtn.addEventListener('click', function() {
+        popup.style.display = 'none';
+      });
+  
+      // Abrir el modal del formulario al hacer clic en "AQUÍ"
+      openFormBtn.addEventListener('click', function() {
+        popup.style.display = 'none'; // Cerrar el pop-up
+        formModal.style.display = 'block'; // Mostrar el modal del formulario
+      });
+  
+      // Cerrar el modal del formulario al hacer clic en la "X"
+      closeFormModalBtn.addEventListener('click', function() {
+        formModal.style.display = 'none';
+      });
+  
+      // Cerrar el modal al hacer clic fuera del contenido
+      window.addEventListener('click', function(e) {
+        if (e.target == formModal) {
+          formModal.style.display = 'none';
+        }
+      });
+  
+      // Manejar el envío del formulario
+      registrationForm.addEventListener('submit', function(e) {
+        e.preventDefault(); // Prevenir el envío por defecto
+  
+        // Realizar validaciones aquí si es necesario
+        // Por ejemplo, verificar que los campos requeridos no estén vacíos
+        var rut = document.getElementById('rut').value.trim();
+        var email = document.getElementById('email').value.trim();
+        var nombre = document.getElementById('nombre').value.trim();
+        var giro = document.getElementById('giro').value.trim();
+        var razon_social = document.getElementById('razon_social').value.trim();
+        var region = document.getElementById('region').value.trim();
+        var ciudad = document.getElementById('ciudad').value.trim();
+        var comuna = document.getElementById('comuna').value.trim();
+  
+        if (rut === '' || email === '' || nombre === '' || giro === '' || razon_social === '' || region === '' || ciudad === '' || comuna === '') {
+          alert('Por favor, completa todos los campos requeridos.');
+          return;
+        }
+  
+        // Si todas las validaciones pasan, mostrar la alerta
+        alert('Solicitud de creación de Usuario enviada !!\n\nSus credenciales serán enviadas al correo ingresado en cuanto los administradores acepten su solicitud');
+  
+        // Cerrar el modal del formulario
+        formModal.style.display = 'none';
+  
+        // Opcional: Reiniciar el formulario
+        registrationForm.reset();
+      });
+    });
+  </script>
+{% endif %}
+
+  
+  
   </body>
 </html>
