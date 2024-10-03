@@ -281,26 +281,7 @@
         }
       </script>
   
-      <!-- Firebase SDK -->
-      {% comment %} <script type="module">
-        // Importa las funciones que necesitas de los SDK que necesitas
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.14.0/firebase-app.js";
-        import { getFirestore, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.14.0/firebase-firestore.js";
-      
-        // Configuración de tu aplicación Firebase
-        const firebaseConfig = {
-          apiKey: "AIzaSyBQQNhFuTqo4C0_pTF4HT2_eYawnP5KZHI",
-          authDomain: "perfectclass-form.firebaseapp.com",
-          projectId: "perfectclass-form",
-          storageBucket: "perfectclass-form.appspot.com",
-          messagingSenderId: "519114225178",
-          appId: "1:519114225178:web:491deb316b1664e83cc3a3"
-        };
-      
-        // Inicializar Firebase
-        const app = initializeApp(firebaseConfig);
-        const db = getFirestore(app);
-      </script>  {% endcomment %}
+  
     </head>
   
     <body class="gradient{% if settings.animations_hover_elements != 'none' %} animate--hover-{{ settings.animations_hover_elements }}{% endif %}">
@@ -454,29 +435,29 @@
   
         <!-- Script actualizado -->
         <script type="module">
-      // Importa las funciones que necesitas de los SDK que necesitas
-  import { initializeApp, getApps } from "https://www.gstatic.com/firebasejs/10.14.0/firebase-app.js";
-  import { getFirestore, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.14.0/firebase-firestore.js";
-
-  // Configuración de tu aplicación Firebase
-  const firebaseConfig = {
-    apiKey: "AIzaSyBQQNhFuTqo4C0_pTF4HT2_eYawnP5KZHI",
-    authDomain: "perfectclass-form.firebaseapp.com",
-    projectId: "perfectclass-form",
-    storageBucket: "perfectclass-form.appspot.com",
-    messagingSenderId: "519114225178",
-    appId: "1:519114225178:web:491deb316b1664e83cc3a3"
-  };
-  
-           // Inicializar Firebase si no está inicializado
-  let app;
-  if (!getApps().length) {
-    app = initializeApp(firebaseConfig);
-  } else {
-    app = getApps()[0];
-  }
-  const db = getFirestore(app);
-
+          // Importa las funciones que necesitas de los SDK que necesitas
+          import { initializeApp, getApps } from "https://www.gstatic.com/firebasejs/10.14.0/firebase-app.js";
+          import { getFirestore, collection, addDoc, query, where, getDocs, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.14.0/firebase-firestore.js";
+        
+          // Configuración de tu aplicación Firebase
+          const firebaseConfig = {
+            apiKey: "AIzaSyBQQNhFuTqo4C0_pTF4HT2_eYawnP5KZHI",
+            authDomain: "perfectclass-form.firebaseapp.com",
+            projectId: "perfectclass-form",
+            storageBucket: "perfectclass-form.appspot.com",
+            messagingSenderId: "519114225178",
+            appId: "1:519114225178:web:491deb316b1664e83cc3a3"
+          };
+        
+          // Inicializar Firebase si no está inicializado
+          let app;
+          if (!getApps().length) {
+            app = initializeApp(firebaseConfig);
+          } else {
+            app = getApps()[0];
+          }
+          const db = getFirestore(app);
+        
           document.addEventListener('DOMContentLoaded', function() {
             var popup = document.getElementById('popup-banner');
             var closePopupBtn = document.getElementById('close-popup');
@@ -484,44 +465,44 @@
             var formModal = document.getElementById('form-modal');
             var closeFormModalBtn = document.getElementById('close-form-modal');
             var registrationForm = document.getElementById('registration-form');
-  
+            var rutInput = document.getElementById('rut'); // Definir la variable rutInput
+        
             // Variables para el modal de confirmación
             var confirmationModal = document.getElementById('confirmation-modal');
             var closeConfirmationModalBtn = document.getElementById('close-confirmation-modal');
             var closeConfirmationButton = document.getElementById('close-confirmation-button');
-  
+        
             // Variables para los selects de región y comuna
             var regionSelect = document.getElementById('region');
             var comunaSelect = document.getElementById('comuna');
-  
+        
             // Objeto con regiones y comunas
-          // Objeto con regiones y comunas
-var regionesYComunas = {
-  "Región de Arica y Parinacota": ["Arica", "Camarones", "Putre", "General Lagos"],
-  "Región de Tarapacá": ["Iquique", "Alto Hospicio", "Pozo Almonte", "Camiña", "Colchane", "Huara", "Pica"],
-  "Región de Antofagasta": ["Antofagasta", "Mejillones", "Sierra Gorda", "Taltal", "Calama", "Ollagüe", "San Pedro de Atacama", "María Elena", "Tocopilla"],
-  "Región de Atacama": ["Copiapó", "Caldera", "Tierra Amarilla", "Chañaral", "Diego de Almagro", "Vallenar", "Alto del Carmen", "Freirina", "Huasco"],
-  "Región de Coquimbo": ["La Serena", "Coquimbo", "Andacollo", "La Higuera", "Paiguano", "Vicuña", "Illapel", "Canela", "Los Vilos", "Salamanca", "Ovalle", "Combarbalá", "Monte Patria", "Punitaqui", "Río Hurtado"],
-  "Región de Valparaíso": ["Valparaíso", "Casablanca", "Concón", "Juan Fernández", "Puchuncaví", "Quintero", "Viña del Mar", "Isla de Pascua", "Los Andes", "Calle Larga", "Rinconada", "San Esteban", "La Ligua", "Cabildo", "Papudo", "Petorca", "Zapallar", "Quillota", "Calera", "Hijuelas", "La Cruz", "Nogales", "San Antonio", "Algarrobo", "Cartagena", "El Quisco", "El Tabo", "Santo Domingo", "San Felipe", "Catemu", "Llaillay", "Panquehue", "Putaendo", "Santa María", "Quilpué", "Limache", "Olmué", "Villa Alemana"],
-  "Región Metropolitana de Santiago": ["Cerrillos", "Cerro Navia", "Conchalí", "El Bosque", "Estación Central", "Huechuraba", "Independencia", "La Cisterna", "La Florida", "La Granja", "La Pintana", "La Reina", "Las Condes", "Lo Barnechea", "Lo Espejo", "Lo Prado", "Macul", "Maipú", "Ñuñoa", "Pedro Aguirre Cerda", "Peñalolén", "Providencia", "Pudahuel", "Quilicura", "Quinta Normal", "Recoleta", "Renca", "San Joaquín", "San Miguel", "San Ramón", "Vitacura", "Puente Alto", "Pirque", "San José de Maipo", "Colina", "Lampa", "Tiltil", "San Bernardo", "Buin", "Calera de Tango", "Paine", "Melipilla", "Alhué", "Curacaví", "María Pinto", "San Pedro", "Talagante", "El Monte", "Isla de Maipo", "Padre Hurtado", "Peñaflor"],
-  "Región del Libertador General Bernardo O'Higgins": ["Rancagua", "Codegua", "Coinco", "Coltauco", "Doñihue", "Graneros", "Las Cabras", "Machalí", "Malloa", "Mostazal", "Olivar", "Peumo", "Pichidegua", "Quinta de Tilcoco", "Rengo", "Requínoa", "San Vicente", "Pichilemu", "La Estrella", "Litueche", "Marchigüe", "Navidad", "Paredones", "San Fernando", "Chépica", "Chimbarongo", "Lolol", "Nancagua", "Palmilla", "Peralillo", "Placilla", "Pumanque", "Santa Cruz"],
-  "Región del Maule": ["Talca", "Constitución", "Curepto", "Empedrado", "Maule", "Pelarco", "Pencahue", "Río Claro", "San Clemente", "San Rafael", "Cauquenes", "Chanco", "Pelluhue", "Curicó", "Hualañé", "Licantén", "Molina", "Rauco", "Romeral", "Sagrada Familia", "Teno", "Vichuquén", "Linares", "Colbún", "Longaví", "Parral", "Retiro", "San Javier", "Villa Alegre", "Yerbas Buenas"],
-  "Región de Ñuble": ["Chillán", "Bulnes", "Cobquecura", "Coelemu", "Coihueco", "El Carmen", "Ninhue", "Ñiquén", "Pemuco", "Pinto", "Portezuelo", "Quillón", "Quirihue", "Ránquil", "San Carlos", "San Fabián", "San Ignacio", "San Nicolás", "Treguaco", "Yungay"],
-  "Región del Biobío": ["Concepción", "Coronel", "Chiguayante", "Florida", "Hualqui", "Lota", "Penco", "San Pedro de la Paz", "Santa Juana", "Talcahuano", "Tomé", "Hualpén", "Lebu", "Arauco", "Cañete", "Contulmo", "Curanilahue", "Los Álamos", "Tirúa", "Los Ángeles", "Antuco", "Cabrero", "Laja", "Mulchén", "Nacimiento", "Negrete", "Quilaco", "Quilleco", "San Rosendo", "Santa Bárbara", "Tucapel", "Yumbel", "Alto Biobío"],
-  "Región de La Araucanía": ["Temuco", "Carahue", "Cunco", "Curarrehue", "Freire", "Galvarino", "Gorbea", "Lautaro", "Loncoche", "Melipeuco", "Nueva Imperial", "Padre Las Casas", "Perquenco", "Pitrufquén", "Pucón", "Saavedra", "Teodoro Schmidt", "Toltén", "Vilcún", "Villarrica", "Cholchol", "Angol", "Collipulli", "Curacautín", "Ercilla", "Lonquimay", "Los Sauces", "Lumaco", "Purén", "Renaico", "Traiguén", "Victoria"],
-  "Región de Los Ríos": ["Valdivia", "Corral", "Lanco", "Los Lagos", "Máfil", "Mariquina", "Paillaco", "Panguipulli", "La Unión", "Futrono", "Lago Ranco", "Río Bueno"],
-  "Región de Los Lagos": ["Puerto Montt", "Calbuco", "Cochamó", "Fresia", "Frutillar", "Los Muermos", "Llanquihue", "Maullín", "Puerto Varas", "Castro", "Ancud", "Chonchi", "Curaco de Vélez", "Dalcahue", "Puqueldón", "Queilén", "Quellón", "Quemchi", "Quinchao", "Osorno", "Puerto Octay", "Purranque", "Puyehue", "Río Negro", "San Juan de la Costa", "San Pablo", "Chaitén", "Futaleufú", "Hualaihué", "Palena"],
-  "Región de Aysén del General Carlos Ibáñez del Campo": ["Coyhaique", "Lago Verde", "Aysén", "Cisnes", "Guaitecas", "Cochrane", "O'Higgins", "Tortel", "Chile Chico", "Río Ibáñez"],
-  "Región de Magallanes y de la Antártica Chilena": ["Punta Arenas", "Laguna Blanca", "Río Verde", "San Gregorio", "Cabo de Hornos", "Antártica", "Porvenir", "Primavera", "Timaukel", "Natales", "Torres del Paine"]
-};
-  
+            var regionesYComunas = {
+              "Región de Arica y Parinacota": ["Arica", "Camarones", "Putre", "General Lagos"],
+              "Región de Tarapacá": ["Iquique", "Alto Hospicio", "Pozo Almonte", "Camiña", "Colchane", "Huara", "Pica"],
+              "Región de Antofagasta": ["Antofagasta", "Mejillones", "Sierra Gorda", "Taltal", "Calama", "Ollagüe", "San Pedro de Atacama", "María Elena", "Tocopilla"],
+              "Región de Atacama": ["Copiapó", "Caldera", "Tierra Amarilla", "Chañaral", "Diego de Almagro", "Vallenar", "Alto del Carmen", "Freirina", "Huasco"],
+              "Región de Coquimbo": ["La Serena", "Coquimbo", "Andacollo", "La Higuera", "Paiguano", "Vicuña", "Illapel", "Canela", "Los Vilos", "Salamanca", "Ovalle", "Combarbalá", "Monte Patria", "Punitaqui", "Río Hurtado"],
+              "Región de Valparaíso": ["Valparaíso", "Casablanca", "Concón", "Juan Fernández", "Puchuncaví", "Quintero", "Viña del Mar", "Isla de Pascua", "Los Andes", "Calle Larga", "Rinconada", "San Esteban", "La Ligua", "Cabildo", "Papudo", "Petorca", "Zapallar", "Quillota", "Calera", "Hijuelas", "La Cruz", "Nogales", "San Antonio", "Algarrobo", "Cartagena", "El Quisco", "El Tabo", "Santo Domingo", "San Felipe", "Catemu", "Llaillay", "Panquehue", "Putaendo", "Santa María", "Quilpué", "Limache", "Olmué", "Villa Alemana"],
+              "Región Metropolitana de Santiago": ["Cerrillos", "Cerro Navia", "Conchalí", "El Bosque", "Estación Central", "Huechuraba", "Independencia", "La Cisterna", "La Florida", "La Granja", "La Pintana", "La Reina", "Las Condes", "Lo Barnechea", "Lo Espejo", "Lo Prado", "Macul", "Maipú", "Ñuñoa", "Pedro Aguirre Cerda", "Peñalolén", "Providencia", "Pudahuel", "Quilicura", "Quinta Normal", "Recoleta", "Renca", "San Joaquín", "San Miguel", "San Ramón", "Vitacura", "Puente Alto", "Pirque", "San José de Maipo", "Colina", "Lampa", "Tiltil", "San Bernardo", "Buin", "Calera de Tango", "Paine", "Melipilla", "Alhué", "Curacaví", "María Pinto", "San Pedro", "Talagante", "El Monte", "Isla de Maipo", "Padre Hurtado", "Peñaflor"],
+              "Región del Libertador General Bernardo O'Higgins": ["Rancagua", "Codegua", "Coinco", "Coltauco", "Doñihue", "Graneros", "Las Cabras", "Machalí", "Malloa", "Mostazal", "Olivar", "Peumo", "Pichidegua", "Quinta de Tilcoco", "Rengo", "Requínoa", "San Vicente", "Pichilemu", "La Estrella", "Litueche", "Marchigüe", "Navidad", "Paredones", "San Fernando", "Chépica", "Chimbarongo", "Lolol", "Nancagua", "Palmilla", "Peralillo", "Placilla", "Pumanque", "Santa Cruz"],
+              "Región del Maule": ["Talca", "Constitución", "Curepto", "Empedrado", "Maule", "Pelarco", "Pencahue", "Río Claro", "San Clemente", "San Rafael", "Cauquenes", "Chanco", "Pelluhue", "Curicó", "Hualañé", "Licantén", "Molina", "Rauco", "Romeral", "Sagrada Familia", "Teno", "Vichuquén", "Linares", "Colbún", "Longaví", "Parral", "Retiro", "San Javier", "Villa Alegre", "Yerbas Buenas"],
+              "Región de Ñuble": ["Chillán", "Bulnes", "Cobquecura", "Coelemu", "Coihueco", "El Carmen", "Ninhue", "Ñiquén", "Pemuco", "Pinto", "Portezuelo", "Quillón", "Quirihue", "Ránquil", "San Carlos", "San Fabián", "San Ignacio", "San Nicolás", "Treguaco", "Yungay"],
+              "Región del Biobío": ["Concepción", "Coronel", "Chiguayante", "Florida", "Hualqui", "Lota", "Penco", "San Pedro de la Paz", "Santa Juana", "Talcahuano", "Tomé", "Hualpén", "Lebu", "Arauco", "Cañete", "Contulmo", "Curanilahue", "Los Álamos", "Tirúa", "Los Ángeles", "Antuco", "Cabrero", "Laja", "Mulchén", "Nacimiento", "Negrete", "Quilaco", "Quilleco", "San Rosendo", "Santa Bárbara", "Tucapel", "Yumbel", "Alto Biobío"],
+              "Región de La Araucanía": ["Temuco", "Carahue", "Cunco", "Curarrehue", "Freire", "Galvarino", "Gorbea", "Lautaro", "Loncoche", "Melipeuco", "Nueva Imperial", "Padre Las Casas", "Perquenco", "Pitrufquén", "Pucón", "Saavedra", "Teodoro Schmidt", "Toltén", "Vilcún", "Villarrica", "Cholchol", "Angol", "Collipulli", "Curacautín", "Ercilla", "Lonquimay", "Los Sauces", "Lumaco", "Purén", "Renaico", "Traiguén", "Victoria"],
+              "Región de Los Ríos": ["Valdivia", "Corral", "Lanco", "Los Lagos", "Máfil", "Mariquina", "Paillaco", "Panguipulli", "La Unión", "Futrono", "Lago Ranco", "Río Bueno"],
+              "Región de Los Lagos": ["Puerto Montt", "Calbuco", "Cochamó", "Fresia", "Frutillar", "Los Muermos", "Llanquihue", "Maullín", "Puerto Varas", "Castro", "Ancud", "Chonchi", "Curaco de Vélez", "Dalcahue", "Puqueldón", "Queilén", "Quellón", "Quemchi", "Quinchao", "Osorno", "Puerto Octay", "Purranque", "Puyehue", "Río Negro", "San Juan de la Costa", "San Pablo", "Chaitén", "Futaleufú", "Hualaihué", "Palena"],
+              "Región de Aysén del General Carlos Ibáñez del Campo": ["Coyhaique", "Lago Verde", "Aysén", "Cisnes", "Guaitecas", "Cochrane", "O'Higgins", "Tortel", "Chile Chico", "Río Ibáñez"],
+              "Región de Magallanes y de la Antártica Chilena": ["Punta Arenas", "Laguna Blanca", "Río Verde", "San Gregorio", "Cabo de Hornos", "Antártica", "Porvenir", "Primavera", "Timaukel", "Natales", "Torres del Paine"]
+            };
+            
             // Evento que se dispara cuando cambia la selección de región
             regionSelect.addEventListener('change', function() {
               var selectedRegion = this.value;
-  
+        
               // Limpiar las opciones actuales del desplegable de comunas
               comunaSelect.innerHTML = '<option value="">Selecciona una comuna</option>';
-  
+        
               if (selectedRegion && regionesYComunas[selectedRegion]) {
                 // Agregar las comunas correspondientes a la región seleccionada
                 regionesYComunas[selectedRegion].forEach(function(comuna) {
@@ -532,26 +513,26 @@ var regionesYComunas = {
                 });
               }
             });
-  
+        
             // Mostrar el pop-up al cargar la página
             popup.style.display = 'block';
-  
+        
             // Cerrar el pop-up al hacer clic en la "X"
             closePopupBtn.addEventListener('click', function() {
               popup.style.display = 'none';
             });
-  
+        
             // Abrir el modal del formulario al hacer clic en "Crear Cuenta"
             openFormBtn.addEventListener('click', function() {
               popup.style.display = 'none'; // Cerrar el pop-up
               formModal.style.display = 'block'; // Mostrar el modal del formulario
             });
-  
+        
             // Cerrar el modal del formulario al hacer clic en la "X"
             closeFormModalBtn.addEventListener('click', function() {
               formModal.style.display = 'none';
             });
-  
+        
             // Cerrar el modal al hacer clic fuera del contenido
             window.addEventListener('click', function(e) {
               if (e.target == formModal) {
@@ -560,12 +541,12 @@ var regionesYComunas = {
                 confirmationModal.style.display = 'none';
               }
             });
-  
+        
             // Manejar el envío del formulario
             registrationForm.addEventListener('submit', async function(e) {
               e.preventDefault(); // Prevenir el envío por defecto
               var idCreaUsu = 'ID-' + Date.now();
-  
+        
               // Recopilar datos del formulario
               var rut = document.getElementById('rut').value.trim();
               var email = document.getElementById('email').value.trim();
@@ -576,13 +557,31 @@ var regionesYComunas = {
               var ciudad = document.getElementById('ciudad').value.trim();
               var comuna = document.getElementById('comuna').value.trim();
               var mensaje = document.getElementById('mensaje').value.trim();
-  
+        
+              // Crear un elemento <span> para mostrar el mensaje de error debajo del campo "RUT"
+              var rutError = document.createElement('span');
+              rutError.style.color = 'red';
+              rutInput.parentNode.appendChild(rutError);
+        
               if (rut === '' || email === '' || nombre === '' || giro === '' || razon_social === '' || region === '' || ciudad === '' || comuna === '') {
                 // Mostrar mensaje de error en un modal personalizado
                 showAlert('Campos incompletos', 'Por favor, completa todos los campos requeridos.', 'warning');
                 return;
               }
-  
+        
+              // Verificar si el RUT ya existe en la colección
+              const q = query(collection(db, 'SOLICITUD_CREACION_USUARIO'), where('rut_empresa', '==', rut));
+              const querySnapshot = await getDocs(q);
+        
+              if (!querySnapshot.empty) {
+                // Mostrar mensaje de error si el RUT ya está registrado
+                rutError.textContent = 'Este RUT ya está registrado.';
+                return;
+              } else {
+                // Limpiar el mensaje de error si el RUT no está registrado
+                rutError.textContent = '';
+              }
+        
               // Crear objeto con los datos del formulario
               const formData = {
                 id_crea_usu: idCreaUsu,
@@ -597,16 +596,16 @@ var regionesYComunas = {
                 mensaje: mensaje || null, // mensaje opcional
                 timestamp: serverTimestamp()
               };
-  
+        
               try {
                 // Enviar datos a Firestore
                 const docRef = await addDoc(collection(db, 'SOLICITUD_CREACION_USUARIO'), formData);
                 console.log("Documento escrito con ID: ", docRef.id);
-  
+        
                 // Mostrar el modal de confirmación
                 formModal.style.display = 'none';
                 confirmationModal.style.display = 'block';
-  
+        
                 // Reiniciar el formulario
                 registrationForm.reset();
               } catch (error) {
@@ -614,55 +613,55 @@ var regionesYComunas = {
                 showAlert('Error', 'Hubo un error al enviar el formulario. Por favor, intenta de nuevo.', 'error');
               }
             });
-  
+        
             // Cerrar el modal de confirmación al hacer clic en la "X"
             closeConfirmationModalBtn.addEventListener('click', function() {
               confirmationModal.style.display = 'none';
             });
-  
+        
             // Cerrar el modal de confirmación al hacer clic en el botón "Aceptar"
             closeConfirmationButton.addEventListener('click', function() {
               confirmationModal.style.display = 'none';
             });
-  
+        
             // Función para mostrar alertas personalizadas
             function showAlert(title, message, type) {
               // Crear el modal de alerta
               var alertModal = document.createElement('div');
               alertModal.classList.add('alert-modal-overlay');
-  
+        
               var alertContent = document.createElement('div');
               alertContent.classList.add('alert-modal-content');
-  
+        
               var alertTitle = document.createElement('h2');
               alertTitle.innerText = title;
-  
+        
               var alertMessage = document.createElement('p');
               alertMessage.innerText = message;
-  
+        
               var alertButton = document.createElement('button');
               alertButton.classList.add('action-button');
               alertButton.innerText = 'Aceptar';
-  
+        
               // Estilos según el tipo de alerta
               if (type === 'warning') {
                 alertTitle.style.color = '#e09b0b';
               } else if (type === 'error') {
                 alertTitle.style.color = '#d93025';
               }
-  
+        
               // Añadir elementos al modal
               alertContent.appendChild(alertTitle);
               alertContent.appendChild(alertMessage);
               alertContent.appendChild(alertButton);
               alertModal.appendChild(alertContent);
               document.body.appendChild(alertModal);
-  
+        
               // Cerrar el modal al hacer clic en el botón
               alertButton.addEventListener('click', function() {
                 document.body.removeChild(alertModal);
               });
-  
+        
               // Cerrar el modal al hacer clic fuera del contenido
               alertModal.addEventListener('click', function(e) {
                 if (e.target == alertModal) {
@@ -672,6 +671,7 @@ var regionesYComunas = {
             }
           });
         </script>
+        
       {% endif %}
   
     </body>
