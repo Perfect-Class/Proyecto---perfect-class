@@ -434,13 +434,16 @@
           </div>
         </div>
   
-        <!-- Script actualizado -->
+        
+
+
+      
         <script type="module">
-          // Importa las funciones que necesitas de los SDK que necesitas
+          
+        // ********  Implementacion de firestore ********************************************* 
           import { initializeApp, getApps } from "https://www.gstatic.com/firebasejs/10.14.0/firebase-app.js";
           import { getFirestore, collection, addDoc, query, where, getDocs, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.14.0/firebase-firestore.js";
         
-          // Configuración de tu aplicación Firebase
           const firebaseConfig = {
             apiKey: "AIzaSyBQQNhFuTqo4C0_pTF4HT2_eYawnP5KZHI",
             authDomain: "perfectclass-form.firebaseapp.com",
@@ -450,7 +453,7 @@
             appId: "1:519114225178:web:491deb316b1664e83cc3a3"
           };
         
-          // Inicializar Firebase si no está inicializado
+        // Inicializa Firebase si no está inicializado
           let app;
           if (!getApps().length) {
             app = initializeApp(firebaseConfig);

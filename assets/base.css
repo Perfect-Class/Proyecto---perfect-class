@@ -3707,31 +3707,4 @@ details-disclosure > details {
 
 
 
-/* Estilo para el botón Iniciar Sesión en pantalla extendida */
-.login-button {
-  font-size: 14px;
-  display: inline-block;
-  padding: 10px 15px;
-  background-color: #ffffff;
-  color: rgb(14, 27, 77);
-  border-radius: 4px;
-  text-decoration: none;
-  font-weight: bold;
-  max-width: fit-content;
-  white-space: nowrap;
-}
 
-/* Posicionar el botón centrado entre el logo y el carrito en pantalla extendida */
-.login-button-container {
-  position: absolute;
-  left: 50%;
-  transform: translate(30%, -100%); /* Posición en pantalla extendida */
-  top: 40%; /* Ajusta la altura del botón según tu necesidad */
-}
-
-/* Cambiar la posición cuando el ancho de pantalla es de 989px o menor */
-@media screen and (max-width: 989px) {
-  .login-button-container {
-    transform: translate(-50%, -40%); /* Cambiar la posición en pantallas más pequeñas */
-  }
-}
