@@ -7,16 +7,13 @@
       <meta name="theme-color" content="">
       <link rel="canonical" href="{{ canonical_url }}">
   
-  
       {%- if settings.favicon != blank -%}
         <link rel="icon" type="image/png" href="{{ settings.favicon | image_url: width: 32, height: 32 }}">
       {%- endif -%}
   
-  
       {%- unless settings.type_header_font.system? and settings.type_body_font.system? -%}
         <link rel="preconnect" href="https://fonts.shopifycdn.com" crossorigin>
       {%- endunless -%}
-  
   
       <title>
         {{ page_title }}
@@ -25,14 +22,11 @@
         {%- unless page_title contains shop.name %} &ndash; {{ shop.name }}{% endunless -%}
       </title>
   
-  
       {% if page_description %}
         <meta name="description" content="{{ page_description | escape }}">
       {% endif %}
   
-  
       {% render 'meta-tags' %}
-  
   
       <script src="{{ 'constants.js' | asset_url }}" defer="defer"></script>
       <script src="{{ 'pubsub.js' | asset_url }}" defer="defer"></script>
@@ -41,9 +35,7 @@
         <script src="{{ 'animations.js' | asset_url }}" defer="defer"></script>
       {%- endif -%}
   
-  
       {{ content_for_header }}
-  
   
       {%- liquid
         assign body_font_bold = settings.type_body_font | font_modify: 'weight', 'bold'
@@ -51,14 +43,12 @@
         assign body_font_bold_italic = body_font_bold | font_modify: 'style', 'italic'
       %}
   
-  
       {% style %}
         {{ settings.type_body_font | font_face: font_display: 'swap' }}
         {{ body_font_bold | font_face: font_display: 'swap' }}
         {{ body_font_italic | font_face: font_display: 'swap' }}
         {{ body_font_bold_italic | font_face: font_display: 'swap' }}
         {{ settings.type_header_font | font_face: font_display: 'swap' }}
-  
   
         {% for scheme in settings.color_schemes -%}
           {% assign scheme_classes = scheme_classes | append: ', .color-' | append: scheme.id %}
@@ -73,7 +63,6 @@
             --gradient-background: {{ scheme.settings.background }};
           {% endif %}
   
-  
           {% liquid
             assign background_color = scheme.settings.background
             assign background_color_brightness = background_color | color_brightness
@@ -85,7 +74,6 @@
               assign background_color_contrast = background_color | color_darken: 25
             endif
           %}
-  
   
           --color-foreground: {{ scheme.settings.text.red }},{{ scheme.settings.text.green }},{{ scheme.settings.text.blue }};
           --color-background-contrast: {{ background_color_contrast.red }},{{ background_color_contrast.green }},{{ background_color_contrast.blue }};
@@ -102,12 +90,10 @@
         }
         {% endfor %}
   
-  
         {{ scheme_classes | prepend: 'body' }} {
           color: rgba(var(--color-foreground), 0.75);
           background-color: rgb(var(--color-background));
         }
-  
   
         :root {
           --font-body-family: {{ settings.type_body_font.family }}, {{ settings.type_body_font.fallback_families }};
@@ -115,15 +101,12 @@
           --font-body-weight: {{ settings.type_body_font.weight }};
           --font-body-weight-bold: {{ settings.type_body_font.weight | plus: 300 | at_most: 1000 }};
   
-  
           --font-heading-family: {{ settings.type_header_font.family }}, {{ settings.type_header_font.fallback_families }};
           --font-heading-style: {{ settings.type_header_font.style }};
           --font-heading-weight: {{ settings.type_header_font.weight }};
   
-  
           --font-body-scale: {{ settings.body_scale | divided_by: 100.0 }};
           --font-heading-scale: {{ settings.heading_scale | times: 1.0 | divided_by: settings.body_scale }};
-  
   
           --media-padding: {{ settings.media_padding }}px;
           --media-border-opacity: {{ settings.media_border_opacity | divided_by: 100.0 }};
@@ -135,10 +118,8 @@
           --media-shadow-blur-radius: {{ settings.media_shadow_blur }}px;
           --media-shadow-visible: {% if settings.media_shadow_opacity > 0 %}1{% else %}0{% endif %};
   
-  
           --page-width: {{ settings.page_width | divided_by: 10 }}rem;
           --page-width-margin: {% if settings.page_width == '1600' %}2{% else %}0{% endif %}rem;
-  
   
           --product-card-image-padding: {{ settings.card_image_padding | divided_by: 10.0 }}rem;
           --product-card-corner-radius: {{ settings.card_corner_radius | divided_by: 10.0 }}rem;
@@ -151,7 +132,6 @@
           --product-card-shadow-vertical-offset: {{ settings.card_shadow_vertical_offset | divided_by: 10.0 }}rem;
           --product-card-shadow-blur-radius: {{ settings.card_shadow_blur | divided_by: 10.0 }}rem;
   
-  
           --collection-card-image-padding: {{ settings.collection_card_image_padding | divided_by: 10.0 }}rem;
           --collection-card-corner-radius: {{ settings.collection_card_corner_radius | divided_by: 10.0 }}rem;
           --collection-card-text-alignment: {{ settings.collection_card_text_alignment }};
@@ -162,7 +142,6 @@
           --collection-card-shadow-horizontal-offset: {{ settings.collection_card_shadow_horizontal_offset | divided_by: 10.0 }}rem;
           --collection-card-shadow-vertical-offset: {{ settings.collection_card_shadow_vertical_offset | divided_by: 10.0 }}rem;
           --collection-card-shadow-blur-radius: {{ settings.collection_card_shadow_blur | divided_by: 10.0 }}rem;
-  
   
           --blog-card-image-padding: {{ settings.blog_card_image_padding | divided_by: 10.0 }}rem;
           --blog-card-corner-radius: {{ settings.blog_card_corner_radius | divided_by: 10.0 }}rem;
@@ -175,9 +154,7 @@
           --blog-card-shadow-vertical-offset: {{ settings.blog_card_shadow_vertical_offset | divided_by: 10.0 }}rem;
           --blog-card-shadow-blur-radius: {{ settings.blog_card_shadow_blur | divided_by: 10.0 }}rem;
   
-  
           --badge-corner-radius: {{ settings.badge_corner_radius | divided_by: 10.0 }}rem;
-  
   
           --popup-border-width: {{ settings.popup_border_thickness }}px;
           --popup-border-opacity: {{ settings.popup_border_opacity | divided_by: 100.0 }};
@@ -187,7 +164,6 @@
           --popup-shadow-vertical-offset: {{ settings.popup_shadow_vertical_offset }}px;
           --popup-shadow-blur-radius: {{ settings.popup_shadow_blur }}px;
   
-  
           --drawer-border-width: {{ settings.drawer_border_thickness }}px;
           --drawer-border-opacity: {{ settings.drawer_border_opacity | divided_by: 100.0 }};
           --drawer-shadow-opacity: {{ settings.drawer_shadow_opacity | divided_by: 100.0 }};
@@ -195,16 +171,13 @@
           --drawer-shadow-vertical-offset: {{ settings.drawer_shadow_vertical_offset }}px;
           --drawer-shadow-blur-radius: {{ settings.drawer_shadow_blur }}px;
   
-  
           --spacing-sections-desktop: {{ settings.spacing_sections }}px;
           --spacing-sections-mobile: {% if settings.spacing_sections < 24 %}{{ settings.spacing_sections }}{% else %}{{ settings.spacing_sections | times: 0.7 | round | at_least: 20 }}{% endif %}px;
-  
   
           --grid-desktop-vertical-spacing: {{ settings.spacing_grid_vertical }}px;
           --grid-desktop-horizontal-spacing: {{ settings.spacing_grid_horizontal }}px;
           --grid-mobile-vertical-spacing: {{ settings.spacing_grid_vertical | divided_by: 2 }}px;
           --grid-mobile-horizontal-spacing: {{ settings.spacing_grid_horizontal | divided_by: 2 }}px;
-  
   
           --text-boxes-border-opacity: {{ settings.text_boxes_border_opacity | divided_by: 100.0 }};
           --text-boxes-border-width: {{ settings.text_boxes_border_thickness }}px;
@@ -214,7 +187,6 @@
           --text-boxes-shadow-horizontal-offset: {{ settings.text_boxes_shadow_horizontal_offset }}px;
           --text-boxes-shadow-vertical-offset: {{ settings.text_boxes_shadow_vertical_offset }}px;
           --text-boxes-shadow-blur-radius: {{ settings.text_boxes_shadow_blur }}px;
-  
   
           --buttons-radius: {{ settings.buttons_radius }}px;
           --buttons-radius-outset: {% if settings.buttons_radius > 0 %}{{ settings.buttons_radius | plus: settings.buttons_border_thickness }}{% else %}0{% endif %}px;
@@ -227,7 +199,6 @@
           --buttons-shadow-blur-radius: {{ settings.buttons_shadow_blur }}px;
           --buttons-border-offset: {% if settings.buttons_radius > 0 or settings.buttons_shadow_opacity > 0 %}0.3{% else %}0{% endif %}px;
   
-  
           --inputs-radius: {{ settings.inputs_radius }}px;
           --inputs-border-width: {{ settings.inputs_border_thickness }}px;
           --inputs-border-opacity: {{ settings.inputs_border_opacity | divided_by: 100.0 }};
@@ -238,7 +209,6 @@
           --inputs-shadow-blur-radius: {{ settings.inputs_shadow_blur }}px;
           --inputs-radius-outset: {% if settings.inputs_radius > 0 %}{{ settings.inputs_radius | plus: settings.inputs_border_thickness }}{% else %}0{% endif %}px;
   
-  
           --variant-pills-radius: {{ settings.variant_pills_radius }}px;
           --variant-pills-border-width: {{ settings.variant_pills_border_thickness }}px;
           --variant-pills-border-opacity: {{ settings.variant_pills_border_opacity | divided_by: 100.0 }};
@@ -248,20 +218,17 @@
           --variant-pills-shadow-blur-radius: {{ settings.variant_pills_shadow_blur }}px;
         }
   
-  
         *,
         *::before,
         *::after {
           box-sizing: inherit;
         }
   
-  
         html {
           box-sizing: border-box;
           font-size: calc(var(--font-body-scale) * 62.5%);
           height: 100%;
         }
-  
   
         body {
           display: grid;
@@ -277,7 +244,6 @@
           font-weight: var(--font-body-weight);
         }
   
-  
         @media screen and (min-width: 750px) {
           body {
             font-size: 1.6rem;
@@ -285,9 +251,7 @@
         }
       {% endstyle %}
   
-  
       {{ 'base.css' | asset_url | stylesheet_tag }}
-  
   
       {%- unless settings.type_body_font.system? -%}
         <link rel="preload" as="font" href="{{ settings.type_body_font | font_url }}" type="font/woff2" crossorigin>
@@ -296,12 +260,10 @@
         <link rel="preload" as="font" href="{{ settings.type_header_font | font_url }}" type="font/woff2" crossorigin>
       {%- endunless -%}
   
-  
       {%- if localization.available_countries.size > 1 or localization.available_languages.size > 1 -%}
         {{ 'component-localization-form.css' | asset_url | stylesheet_tag: preload: true }}
         <script src="{{ 'localization-form.js' | asset_url }}" defer="defer"></script>
       {%- endif -%}
-  
   
       {%- if settings.predictive_search_enabled -%}
         <link
@@ -312,45 +274,38 @@
         >
       {%- endif -%}
   
-  
       <script>
         document.documentElement.className = document.documentElement.className.replace('no-js', 'js');
         if (Shopify.designMode) {
           document.documentElement.classList.add('shopify-design-mode');
         }
-            </script>
-    </head>
+      </script>
   
+  
+    </head>
   
     <body class="gradient{% if settings.animations_hover_elements != 'none' %} animate--hover-{{ settings.animations_hover_elements }}{% endif %}">
       <a class="skip-to-content-link button visually-hidden" href="#MainContent">
         {{ 'accessibility.skip_to_text' | t }}
       </a>
   
-  
       {%- if settings.cart_type == 'drawer' -%}
         {%- render 'cart-drawer' -%}
       {%- endif -%}
   
-  
       {% sections 'header-group' %}
-  
+     
   
       <main id="MainContent" class="content-for-layout focus-none" role="main" tabindex="-1">
         {{ content_for_layout }}{% include 'ymq_lock_css_js' %}
-  
-  
       </main>
   
-  
       {% sections 'footer-group' %}
-  
   
       <ul hidden>
         <li id="a11y-refresh-page-message">{{ 'accessibility.refresh_page' | t }}</li>
         <li id="a11y-new-window-message">{{ 'accessibility.link_messages.new_window' | t }}</li>
       </ul>
-  
   
       <script>
         window.shopUrl = '{{ request.origin }}';
@@ -362,46 +317,368 @@
           predictive_search_url: '{{ routes.predictive_search_url }}',
         };
   
-  
         window.cartStrings = {
-          error: {{ 'sections.cart.cart_error' | t }},
-          quantityError: {{ 'sections.cart.cart_quantity_error_html' | t: quantity: '[quantity]' }},
+          error: `{{ 'sections.cart.cart_error' | t }}`,
+          quantityError: `{{ 'sections.cart.cart_quantity_error_html' | t: quantity: '[quantity]' }}`,
         };
-  
   
         window.variantStrings = {
-          addToCart: {{ 'products.product.add_to_cart' | t }},
-          soldOut: {{ 'products.product.sold_out' | t }},
-          unavailable: {{ 'products.product.unavailable' | t }},
-          unavailable_with_option: {{ 'products.product.value_unavailable' | t: option_value: '[value]' }},
+          addToCart: `{{ 'products.product.add_to_cart' | t }}`,
+          soldOut: `{{ 'products.product.sold_out' | t }}`,
+          unavailable: `{{ 'products.product.unavailable' | t }}`,
+          unavailable_with_option: `{{ 'products.product.value_unavailable' | t: option_value: '[value]' }}`,
         };
-  
   
         window.quickOrderListStrings = {
-          itemsAdded: {{ 'sections.quick_order_list.items_added.other' | t: quantity: '[quantity]' }},
-          itemAdded: {{ 'sections.quick_order_list.items_added.one' | t: quantity: '[quantity]' }},
-          itemsRemoved: {{ 'sections.quick_order_list.items_removed.other' | t: quantity: '[quantity]' }},
-          itemRemoved: {{ 'sections.quick_order_list.items_removed.one' | t: quantity: '[quantity]' }},
-          viewCart: {{- 'sections.quick_order_list.view_cart' | t -}},
-          each: {{- 'sections.quick_order_list.each' | t: money: '[money]' }},
+          itemsAdded: `{{ 'sections.quick_order_list.items_added.other' | t: quantity: '[quantity]' }}`,
+          itemAdded: `{{ 'sections.quick_order_list.items_added.one' | t: quantity: '[quantity]' }}`,
+          itemsRemoved: `{{ 'sections.quick_order_list.items_removed.other' | t: quantity: '[quantity]' }}`,
+          itemRemoved: `{{ 'sections.quick_order_list.items_removed.one' | t: quantity: '[quantity]' }}`,
+          viewCart: `{{- 'sections.quick_order_list.view_cart' | t -}}`,
+          each: `{{- 'sections.quick_order_list.each' | t: money: '[money]' }}`,
         };
-  
   
         window.accessibilityStrings = {
-          imageAvailable: {{ 'products.product.media.image_available' | t: index: '[index]' }},
-          shareSuccess: {{ 'general.share.success_message' | t }},
-          pauseSlideshow: {{ 'sections.slideshow.pause_slideshow' | t }},
-          playSlideshow: {{ 'sections.slideshow.play_slideshow' | t }},
-          recipientFormExpanded: {{ 'recipient.form.expanded' | t }},
-          recipientFormCollapsed: {{ 'recipient.form.collapsed' | t }},
+          imageAvailable: `{{ 'products.product.media.image_available' | t: index: '[index]' }}`,
+          shareSuccess: `{{ 'general.share.success_message' | t }}`,
+          pauseSlideshow: `{{ 'sections.slideshow.pause_slideshow' | t }}`,
+          playSlideshow: `{{ 'sections.slideshow.play_slideshow' | t }}`,
+          recipientFormExpanded: `{{ 'recipient.form.expanded' | t }}`,
+          recipientFormCollapsed: `{{ 'recipient.form.collapsed' | t }}`,
         };
       </script>
-  
   
       {%- if settings.predictive_search_enabled -%}
         <script src="{{ 'predictive-search.js' | asset_url }}" defer="defer"></script>
       {%- endif -%}
-    </body>
-  </html>
   
+      {% comment %} *************************************** BANNER POP UP ****************************** {% endcomment %}
+      {% if template.name == 'index' %}
+        <!-- Pop-up Banner -->
+        <div id="popup-banner" class="popup-banner">
+          <div class="popup-content">
+            <span id="close-popup" class="close-button">&times;</span>
+            <h2>Bienvenido a nuestra tienda</h2>
+            <p>Crea tu cuenta de usuario para poder cotizar los productos que desees</p>
+            <!-- Botón "Crear Cuenta" -->
+            <button id="open-form-modal" class="action-button">Crear Cuenta</button>
+          </div>
+        </div>
+  
+        <!-- Modal del formulario -->
+        <div id="form-modal" class="modal-overlay">
+          <div class="modal-content">
+            <span id="close-form-modal" class="close-button">&times;</span>
+            <h2>Formulario de Registro</h2>
+            <form id="registration-form" action="#" method="post">
+              <label for="rut">Rut de la empresa:</label>
+              <input type="text" id="rut" name="rut" required>
+  
+              <label for="email">Email:</label>
+              <input type="email" id="email" name="email" required>
+  
+              <label for="nombre">Nombre y apellido:</label>
+              <input type="text" id="nombre" name="nombre" required>
+  
+              <label for="giro">Giro:</label>
+              <input type="text" id="giro" name="giro" required>
+  
+              <label for="razon_social">Razón social:</label>
+              <input type="text" id="razon_social" name="razon_social" required>
+  
+              <label for="region">Región:</label>
+              <select id="region" name="region" required>
+                <option value="" disabled selected></option>
+                <option value="" disabled selected></option>
+                <option value="Región de Arica y Parinacota">Región de Arica y Parinacota</option>
+                <option value="Región de Tarapacá">Región de Tarapacá</option>
+                <option value="Región de Antofagasta">Región de Antofagasta</option>
+                <option value="Región de Atacama">Región de Atacama</option>
+                <option value="Región de Coquimbo">Región de Coquimbo</option>
+                <option value="Región de Valparaíso">Región de Valparaíso</option>
+                <option value="Región Metropolitana de Santiago">Región Metropolitana de Santiago</option>
+                <option value="Región del Libertador General Bernardo O'Higgins">Región del Libertador General Bernardo O'Higgins</option>
+                <option value="Región del Maule">Región del Maule</option>
+                <option value="Región de Ñuble">Región de Ñuble</option>
+                <option value="Región del Biobío">Región del Biobío</option>
+                <option value="Región de La Araucanía">Región de La Araucanía</option>
+                <option value="Región de Los Ríos">Región de Los Ríos</option>
+                <option value="Región de Los Lagos">Región de Los Lagos</option>
+                <option value="Región de Aysén del General Carlos Ibáñez del Campo">Región de Aysén del General Carlos Ibáñez del Campo</option>
+                <option value="Región de Magallanes y de la Antártica Chilena">Región de Magallanes y de la Antártica Chilena</option>
+              </select>
+  
+              <label for="ciudad">Ciudad:</label>
+              <input type="text" id="ciudad" name="ciudad" required>
+  
+              <label for="comuna">Comuna:</label>
+              <select id="comuna" name="comuna" required>
+                <option value=""></option>
+              </select>
+  
+              <label for="mensaje">Mensaje (opcional):</label>
+              <textarea id="mensaje" name="mensaje"></textarea>
+  
+              <input type="submit" value="Enviar" class="submit-button">
+            </form>
+          </div>
+        </div>
+  
+        <!-- Modal de confirmación personalizado -->
+        <div id="confirmation-modal" class="modal-overlay">
+          <div class="modal-content">
+            <span id="close-confirmation-modal" class="close-button">&times;</span>
+            <h2>Solicitud de creación de Usuario enviada con éxito !!</h2>
+            <p>Sus credenciales serán enviadas al correo ingresado en cuanto los administradores acepten su solicitud.</p>
+            <button id="close-confirmation-button" class="action-button">Aceptar</button>
+          </div>
+        </div>
+  
+        
+
+
+      
+        <script type="module">
+          
+        // ********  Implementacion de firestore ********************************************* 
+          import { initializeApp, getApps } from "https://www.gstatic.com/firebasejs/10.14.0/firebase-app.js";
+          import { getFirestore, collection, addDoc, query, where, getDocs, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.14.0/firebase-firestore.js";
+        
+          const firebaseConfig = {
+            apiKey: "AIzaSyBQQNhFuTqo4C0_pTF4HT2_eYawnP5KZHI",
+            authDomain: "perfectclass-form.firebaseapp.com",
+            projectId: "perfectclass-form",
+            storageBucket: "perfectclass-form.appspot.com",
+            messagingSenderId: "519114225178",
+            appId: "1:519114225178:web:491deb316b1664e83cc3a3"
+          };
+        
+        // Inicializa Firebase si no está inicializado
+          let app;
+          if (!getApps().length) {
+            app = initializeApp(firebaseConfig);
+          } else {
+            app = getApps()[0];
+          }
+          const db = getFirestore(app);
+        
+          document.addEventListener('DOMContentLoaded', function() {
+            var popup = document.getElementById('popup-banner');
+            var closePopupBtn = document.getElementById('close-popup');
+            var openFormBtn = document.getElementById('open-form-modal');
+            var formModal = document.getElementById('form-modal');
+            var closeFormModalBtn = document.getElementById('close-form-modal');
+            var registrationForm = document.getElementById('registration-form');
+            var rutInput = document.getElementById('rut'); // Definir la variable rutInput
+        
+            // Variables para el modal de confirmación
+            var confirmationModal = document.getElementById('confirmation-modal');
+            var closeConfirmationModalBtn = document.getElementById('close-confirmation-modal');
+            var closeConfirmationButton = document.getElementById('close-confirmation-button');
+        
+            // Variables para los selects de región y comuna
+            var regionSelect = document.getElementById('region');
+            var comunaSelect = document.getElementById('comuna');
+        
+            // Objeto con regiones y comunas
+            var regionesYComunas = {
+              "Región de Arica y Parinacota": ["Arica", "Camarones", "Putre", "General Lagos"],
+              "Región de Tarapacá": ["Iquique", "Alto Hospicio", "Pozo Almonte", "Camiña", "Colchane", "Huara", "Pica"],
+              "Región de Antofagasta": ["Antofagasta", "Mejillones", "Sierra Gorda", "Taltal", "Calama", "Ollagüe", "San Pedro de Atacama", "María Elena", "Tocopilla"],
+              "Región de Atacama": ["Copiapó", "Caldera", "Tierra Amarilla", "Chañaral", "Diego de Almagro", "Vallenar", "Alto del Carmen", "Freirina", "Huasco"],
+              "Región de Coquimbo": ["La Serena", "Coquimbo", "Andacollo", "La Higuera", "Paiguano", "Vicuña", "Illapel", "Canela", "Los Vilos", "Salamanca", "Ovalle", "Combarbalá", "Monte Patria", "Punitaqui", "Río Hurtado"],
+              "Región de Valparaíso": ["Valparaíso", "Casablanca", "Concón", "Juan Fernández", "Puchuncaví", "Quintero", "Viña del Mar", "Isla de Pascua", "Los Andes", "Calle Larga", "Rinconada", "San Esteban", "La Ligua", "Cabildo", "Papudo", "Petorca", "Zapallar", "Quillota", "Calera", "Hijuelas", "La Cruz", "Nogales", "San Antonio", "Algarrobo", "Cartagena", "El Quisco", "El Tabo", "Santo Domingo", "San Felipe", "Catemu", "Llaillay", "Panquehue", "Putaendo", "Santa María", "Quilpué", "Limache", "Olmué", "Villa Alemana"],
+              "Región Metropolitana de Santiago": ["Cerrillos", "Cerro Navia", "Conchalí", "El Bosque", "Estación Central", "Huechuraba", "Independencia", "La Cisterna", "La Florida", "La Granja", "La Pintana", "La Reina", "Las Condes", "Lo Barnechea", "Lo Espejo", "Lo Prado", "Macul", "Maipú", "Ñuñoa", "Pedro Aguirre Cerda", "Peñalolén", "Providencia", "Pudahuel", "Quilicura", "Quinta Normal", "Recoleta", "Renca", "San Joaquín", "San Miguel", "San Ramón", "Vitacura", "Puente Alto", "Pirque", "San José de Maipo", "Colina", "Lampa", "Tiltil", "San Bernardo", "Buin", "Calera de Tango", "Paine", "Melipilla", "Alhué", "Curacaví", "María Pinto", "San Pedro", "Talagante", "El Monte", "Isla de Maipo", "Padre Hurtado", "Peñaflor"],
+              "Región del Libertador General Bernardo O'Higgins": ["Rancagua", "Codegua", "Coinco", "Coltauco", "Doñihue", "Graneros", "Las Cabras", "Machalí", "Malloa", "Mostazal", "Olivar", "Peumo", "Pichidegua", "Quinta de Tilcoco", "Rengo", "Requínoa", "San Vicente", "Pichilemu", "La Estrella", "Litueche", "Marchigüe", "Navidad", "Paredones", "San Fernando", "Chépica", "Chimbarongo", "Lolol", "Nancagua", "Palmilla", "Peralillo", "Placilla", "Pumanque", "Santa Cruz"],
+              "Región del Maule": ["Talca", "Constitución", "Curepto", "Empedrado", "Maule", "Pelarco", "Pencahue", "Río Claro", "San Clemente", "San Rafael", "Cauquenes", "Chanco", "Pelluhue", "Curicó", "Hualañé", "Licantén", "Molina", "Rauco", "Romeral", "Sagrada Familia", "Teno", "Vichuquén", "Linares", "Colbún", "Longaví", "Parral", "Retiro", "San Javier", "Villa Alegre", "Yerbas Buenas"],
+              "Región de Ñuble": ["Chillán", "Bulnes", "Cobquecura", "Coelemu", "Coihueco", "El Carmen", "Ninhue", "Ñiquén", "Pemuco", "Pinto", "Portezuelo", "Quillón", "Quirihue", "Ránquil", "San Carlos", "San Fabián", "San Ignacio", "San Nicolás", "Treguaco", "Yungay"],
+              "Región del Biobío": ["Concepción", "Coronel", "Chiguayante", "Florida", "Hualqui", "Lota", "Penco", "San Pedro de la Paz", "Santa Juana", "Talcahuano", "Tomé", "Hualpén", "Lebu", "Arauco", "Cañete", "Contulmo", "Curanilahue", "Los Álamos", "Tirúa", "Los Ángeles", "Antuco", "Cabrero", "Laja", "Mulchén", "Nacimiento", "Negrete", "Quilaco", "Quilleco", "San Rosendo", "Santa Bárbara", "Tucapel", "Yumbel", "Alto Biobío"],
+              "Región de La Araucanía": ["Temuco", "Carahue", "Cunco", "Curarrehue", "Freire", "Galvarino", "Gorbea", "Lautaro", "Loncoche", "Melipeuco", "Nueva Imperial", "Padre Las Casas", "Perquenco", "Pitrufquén", "Pucón", "Saavedra", "Teodoro Schmidt", "Toltén", "Vilcún", "Villarrica", "Cholchol", "Angol", "Collipulli", "Curacautín", "Ercilla", "Lonquimay", "Los Sauces", "Lumaco", "Purén", "Renaico", "Traiguén", "Victoria"],
+              "Región de Los Ríos": ["Valdivia", "Corral", "Lanco", "Los Lagos", "Máfil", "Mariquina", "Paillaco", "Panguipulli", "La Unión", "Futrono", "Lago Ranco", "Río Bueno"],
+              "Región de Los Lagos": ["Puerto Montt", "Calbuco", "Cochamó", "Fresia", "Frutillar", "Los Muermos", "Llanquihue", "Maullín", "Puerto Varas", "Castro", "Ancud", "Chonchi", "Curaco de Vélez", "Dalcahue", "Puqueldón", "Queilén", "Quellón", "Quemchi", "Quinchao", "Osorno", "Puerto Octay", "Purranque", "Puyehue", "Río Negro", "San Juan de la Costa", "San Pablo", "Chaitén", "Futaleufú", "Hualaihué", "Palena"],
+              "Región de Aysén del General Carlos Ibáñez del Campo": ["Coyhaique", "Lago Verde", "Aysén", "Cisnes", "Guaitecas", "Cochrane", "O'Higgins", "Tortel", "Chile Chico", "Río Ibáñez"],
+              "Región de Magallanes y de la Antártica Chilena": ["Punta Arenas", "Laguna Blanca", "Río Verde", "San Gregorio", "Cabo de Hornos", "Antártica", "Porvenir", "Primavera", "Timaukel", "Natales", "Torres del Paine"]
+            };
+            
+            // Evento que se dispara cuando cambia la selección de región
+            regionSelect.addEventListener('change', function() {
+              var selectedRegion = this.value;
+        
+              // Limpiar las opciones actuales del desplegable de comunas
+              comunaSelect.innerHTML = '<option value="">Selecciona una comuna</option>';
+        
+              if (selectedRegion && regionesYComunas[selectedRegion]) {
+                // Agregar las comunas correspondientes a la región seleccionada
+                regionesYComunas[selectedRegion].forEach(function(comuna) {
+                  var option = document.createElement('option');
+                  option.value = comuna;
+                  option.textContent = comuna;
+                  comunaSelect.appendChild(option);
+                });
+              }
+            });
+        
+            // Mostrar el pop-up al cargar la página
+            popup.style.display = 'block';
+        
+            // Cerrar el pop-up al hacer clic en la "X"
+            closePopupBtn.addEventListener('click', function() {
+              popup.style.display = 'none';
+            });
+        
+            // Abrir el modal del formulario al hacer clic en "Crear Cuenta"
+            openFormBtn.addEventListener('click', function() {
+              popup.style.display = 'none'; // Cerrar el pop-up
+              formModal.style.display = 'block'; // Mostrar el modal del formulario
+            });
+        
+            // Cerrar el modal del formulario al hacer clic en la "X"
+            closeFormModalBtn.addEventListener('click', function() {
+              formModal.style.display = 'none';
+            });
+        
+            // Cerrar el modal al hacer clic fuera del contenido
+            window.addEventListener('click', function(e) {
+              if (e.target == formModal) {
+                formModal.style.display = 'none';
+              } else if (e.target == confirmationModal) {
+                confirmationModal.style.display = 'none';
+              }
+            });
+        
+            // Manejar el envío del formulario
+            registrationForm.addEventListener('submit', async function(e) {
+              e.preventDefault(); // Prevenir el envío por defecto
+              var idCreaUsu = 'ID-' + Date.now();
+        
+              // Recopilar datos del formulario
+              var rut = document.getElementById('rut').value.trim();
+              var email = document.getElementById('email').value.trim();
+              var nombre = document.getElementById('nombre').value.trim();
+              var giro = document.getElementById('giro').value.trim();
+              var razon_social = document.getElementById('razon_social').value.trim();
+              var region = document.getElementById('region').value.trim();
+              var ciudad = document.getElementById('ciudad').value.trim();
+              var comuna = document.getElementById('comuna').value.trim();
+              var mensaje = document.getElementById('mensaje').value.trim();
+        
+              // Crear un elemento <span> para mostrar el mensaje de error debajo del campo "RUT"
+              var rutError = document.createElement('span');
+              rutError.style.color = 'red';
+              rutInput.parentNode.appendChild(rutError);
+        
+              if (rut === '' || email === '' || nombre === '' || giro === '' || razon_social === '' || region === '' || ciudad === '' || comuna === '') {
+                // Mostrar mensaje de error en un modal personalizado
+                showAlert('Campos incompletos', 'Por favor, completa todos los campos requeridos.', 'warning');
+                return;
+              }
+        
+              // Verificar si el RUT ya existe en la colección
+              const q = query(collection(db, 'SOLICITUD_CREACION_USUARIO'), where('rut_empresa', '==', rut));
+              const querySnapshot = await getDocs(q);
+        
+              if (!querySnapshot.empty) {
+                // Mostrar mensaje de error si el RUT ya está registrado
+                rutError.textContent = 'Este RUT ya está registrado.';
+                return;
+              } else {
+                // Limpiar el mensaje de error si el RUT no está registrado
+                rutError.textContent = '';
+              }
+        
+              // Crear objeto con los datos del formulario
+              const formData = {
+                id_crea_usu: idCreaUsu,
+                rut_empresa: rut,
+                correo_electronico: email,
+                nombre_apellido: nombre,
+                giro: giro,
+                razon_social: razon_social,
+                region: region,
+                ciudad: ciudad,
+                comuna: comuna,
+                mensaje: mensaje || null, // mensaje opcional
+                timestamp: serverTimestamp()
+              };
+        
+              try {
+                // Enviar datos a Firestore
+                const docRef = await addDoc(collection(db, 'SOLICITUD_CREACION_USUARIO'), formData);
+                console.log("Documento escrito con ID: ", docRef.id);
+        
+                // Mostrar el modal de confirmación
+                formModal.style.display = 'none';
+                confirmationModal.style.display = 'block';
+        
+                // Reiniciar el formulario
+                registrationForm.reset();
+              } catch (error) {
+                console.error("Error al agregar el documento: ", error);
+                showAlert('Error', 'Hubo un error al enviar el formulario. Por favor, intenta de nuevo.', 'error');
+              }
+            });
+        
+            // Cerrar el modal de confirmación al hacer clic en la "X"
+            closeConfirmationModalBtn.addEventListener('click', function() {
+              confirmationModal.style.display = 'none';
+            });
+        
+            // Cerrar el modal de confirmación al hacer clic en el botón "Aceptar"
+            closeConfirmationButton.addEventListener('click', function() {
+              confirmationModal.style.display = 'none';
+            });
+        
+            // Función para mostrar alertas personalizadas
+            function showAlert(title, message, type) {
+              // Crear el modal de alerta
+              var alertModal = document.createElement('div');
+              alertModal.classList.add('alert-modal-overlay');
+        
+              var alertContent = document.createElement('div');
+              alertContent.classList.add('alert-modal-content');
+        
+              var alertTitle = document.createElement('h2');
+              alertTitle.innerText = title;
+        
+              var alertMessage = document.createElement('p');
+              alertMessage.innerText = message;
+        
+              var alertButton = document.createElement('button');
+              alertButton.classList.add('action-button');
+              alertButton.innerText = 'Aceptar';
+        
+              // Estilos según el tipo de alerta
+              if (type === 'warning') {
+                alertTitle.style.color = '#e09b0b';
+              } else if (type === 'error') {
+                alertTitle.style.color = '#d93025';
+              }
+        
+              // Añadir elementos al modal
+              alertContent.appendChild(alertTitle);
+              alertContent.appendChild(alertMessage);
+              alertContent.appendChild(alertButton);
+              alertModal.appendChild(alertContent);
+              document.body.appendChild(alertModal);
+        
+              // Cerrar el modal al hacer clic en el botón
+              alertButton.addEventListener('click', function() {
+                document.body.removeChild(alertModal);
+              });
+        
+              // Cerrar el modal al hacer clic fuera del contenido
+              alertModal.addEventListener('click', function(e) {
+                if (e.target == alertModal) {
+                  document.body.removeChild(alertModal);
+                }
+              });
+            }
+          });
+        </script>
+        
+      {% endif %}
+  
+    </body>
+  
+  </html>
   
